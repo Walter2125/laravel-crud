@@ -10,3 +10,7 @@ Route::get('/show/{id}', [UserController::class, 'show'])->name('show');
 Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
 Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
 Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('delete');
+Route::patch('/restore/{id}', [UserController::class, 'restore'])->name('restore');
+Route::get('/trash', [UserController::class, 'trash'])->name('trash');
+
+

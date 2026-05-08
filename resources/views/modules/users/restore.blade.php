@@ -7,10 +7,9 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{ route('create') }}" class="btn btn-primary">
-                            Agregar
+                        <a href="{{ route('index') }}" class="btn btn-primary">
+                            Home
                         </a>
-                        <a href="{{ route('trash') }}" class="btn btn-secondary">Papeleria</a>
                         <hr>
                         <table class="table table-sm table-bordered text-center">
                             <thead>
@@ -26,12 +25,10 @@
                                         <td>{{ $item->name}}</td>
                                         <td>{{ $item->id}}</td>
                                         <td>
-                                            <form action="{{ route('delete', $item->id) }}" method="post">
+                                            <form action="{{ route('restore', $item->id) }}" method="POST">
                                                 @csrf
-                                                @method('DELETE')
-                                                <a href="{{ route('show', $item->id) }}" class="btn btn-primary">Mostrar</a>
-                                                <a href="{{ route('edit', $item->id) }}" class="btn btn-secondary">Editar</a>
-                                                <button class="btn btn-danger">Borrar</button>                                              
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-success btn-sm">Restaurar</button>
                                             </form>
                                         </td>
                                     </tr>

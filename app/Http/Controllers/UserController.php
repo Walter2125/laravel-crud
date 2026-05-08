@@ -82,4 +82,25 @@ class UserController extends Controller
 
         return to_route('index');
     }
+
+    /**
+     * En trash() usas onlyTrashed() porque tu intención es listar exclusivamente lo que está en la papelera.
+     * En restore() usas withTrashed() porque necesitas localizar el registro sin que el framework te bloquee el acceso por estar "oculto", asegurando que la operación de limpieza del campo deleted_at se complete sin conflictos.
+     */
+
+    //funcion para que devuelve la vista restore
+    public function trash()
+    {
+        $items = User::onlyTrashed()->paginate(2); // onlyTrashed() filtra para mostrar SOLO los borrados
+        return view('modules.users.restore', compact('items'));
+    }
+
+    // funcion para restablecer valores borradas
+    public function restore(string $id)
+    {
+        $item = User::withTrashed()->findOrFail($id); //withTrashed() incluye todo (registros activos y registros borrados).
+        $item->restore();
+
+        return to_route('trash');
+    }
 }
